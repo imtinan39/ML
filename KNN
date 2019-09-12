@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy.random as np
+import math
+
+x1=[np.uniform(low=0.3,high=4.2) for i in range(20)]
+x1
+x2=[np.uniform(low=0.5,high=6.2) for i in range(20)]
+x2
+clas=[np.randint(low=0,high=2) for i in range(20)]
+clas.sort(reverse=True)
+dataset=list(zip(x1,x2,clas))
+df=pd.DataFrame(data=dataset,columns=['x1','x2','clas'])
+df
+distance=[]
+featurex1=int(input("enter the unknown class feature x1= "))
+featurex2=int(input("enter the unknown class feature x2= "))
+
+df
+for i in range(0,20):
+    distance.append((math.sqrt((math.pow((x1[i]-featurex1),2)+math.pow((x2[i]-featurex2),2)))))
+
+datasetwithdistance=list(zip(x1,x2,clas,distance))
+df1=pd.DataFrame(data=datasetwithdistance,columns=['x1','x2','class','distance'])
+df1
+sort=df1.sort_values(['distance'],ascending=True)
+sort
+k=int(input('enter the value of k '))
+sort1=sort.head(k)
+li=sort1['class'].value_counts()
+final=li.to_frame()
+final.head(1)
